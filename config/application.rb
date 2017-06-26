@@ -8,10 +8,12 @@ Bundler.require(*Rails.groups)
 
 module Bookseattle
   class Application < Rails::Application
-  # Force new test files to be generated in the minitest-spec style
-  config.generators do |g|
-    g.test_framework :minitest, spec: true
-  end
+
+    config.api_only = true
+    # Force new test files to be generated in the minitest-spec style
+    config.generators do |g|
+      g.test_framework :minitest, spec: true
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
