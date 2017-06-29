@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626010332) do
+ActiveRecord::Schema.define(version: 20170629231940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name", limit: 50, null: false
@@ -21,6 +26,15 @@ ActiveRecord::Schema.define(version: 20170626010332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_locations_on_name", unique: true
+  end
+
+  create_table "room_rates", force: :cascade do |t|
+    t.decimal "rate", precision: 10, scale: 2, default: "0.0", null: false
+    t.daterange "duration", null: false
+    t.bigint "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["room_id"], name: "index_room_rates_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
