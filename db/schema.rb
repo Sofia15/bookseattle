@@ -16,14 +16,14 @@ ActiveRecord::Schema.define(version: 20170626010332) do
   enable_extension "plpgsql"
 
   create_table "locations", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 50, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_locations_on_name", unique: true
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name", limit: 50, null: false
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
