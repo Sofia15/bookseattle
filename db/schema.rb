@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20170629234626) do
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["room_id", "rate_duration"], name: "index_room_rates_on_room_id_and_rate_duration", unique: true
     t.index ["room_id"], name: "index_room_rates_on_room_id"
   end
 
