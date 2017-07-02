@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :locations, except: [:new, :edit]
-  resources :rooms, except: [:new, :edit]
+  resources :rooms, only: [:show, :index]
+  resources :reservations, except: [:new, :edit]
 
 end

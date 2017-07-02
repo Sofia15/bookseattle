@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  respond_to :json
 
   def show
     @room = Room.find(1)
@@ -7,12 +8,4 @@ class RoomsController < ApplicationController
   def index
   end
 
-  def create
-  end
-
-  def update
-  end
-
-  def destroy
-  end
 end
