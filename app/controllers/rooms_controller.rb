@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
 
   def show
+    @room = Room.find(1)
   end
 
   def index
