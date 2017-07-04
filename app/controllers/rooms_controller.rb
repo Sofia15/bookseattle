@@ -1,11 +1,13 @@
 class RoomsController < ApplicationController
-  respond_to :json
 
   def show
-    @room = Room.find(1)
+    room = Room.find(params[:id])
+    respond_with room
   end
 
   def index
+    rooms = Room.all
+    respond_with rooms
   end
 
 end
