@@ -5,37 +5,77 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# Room.destroy_all
 
-seattle = Location.first_or_create!(
-  name: "Seattle",
-  markdown: <<-DOC.strip_heredoc
-  This is markdown. Whitespace will be preserved.
-DOC
-)
+ActiveRecord::Base.transaction do
 
-Room.first_or_create!(
-  name: "Hello Kitty",
-  location: seattle,
-  markdown: <<-DOC.strip_heredoc
-  This is markdown. Whitespace will be preserved.
-  <%= image_tag('kitty.jpg') %>
-DOC
-)
+  seattle = Location.find_or_create_by!(
+    # id: 1,
+    name: "Seattle",
+    markdown: <<-DOC.strip_heredoc
+    This is markdown. Whitespace will be preserved.
+  DOC
+  )
 
-Room.first_or_create!(
-  name: "Paris",
-  location: seattle,
-  markdown: <<-DOC.strip_heredoc
-  This is markdown. Whitespace will be preserved.
-  <%= image_tag('paris.jpg') %>
-DOC
-)
+  Room.find_or_create_by!(
+    name: "Wonder World",
+    location: seattle,
+    markdown: <<-DOC.strip_heredoc
+    ## Wonder World
 
-Room.first_or_create!(
-  name: "Dorm",
-  location: seattle,
-  markdown: <<-DOC.strip_heredoc
-  This is markdown. Whitespace will be preserved.
-  <%= image_tag('dorm.jpg' %>
-DOC
-)
+    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/kitty.jpg)
+    ###About the room
+    Would you like to make your baby’s food and clean your baby supplies in a comfortable kitchen? Do you want to feel more accepted when your baby cry at night? You can still do it when
+    ###The space
+    * Accommodates: 3-4
+    * Beds: 2
+    * Bathrooms: private
+
+    ###Amenities
+    * Parking: Street parking
+    * Internet: Yes
+    * Kitchen: Share
+  DOC
+  )
+
+  Room.find_or_create_by!(
+    name: "Paris",
+    location: seattle,
+    markdown: <<-DOC.strip_heredoc
+    ## Paris
+
+    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/paris.jpg)
+
+    ###About the room
+    This romantic room is for  you and your loving one. You will stay in our the most romantic space and explore things that you would do in Paris..
+    ###The space
+    * Accommodates: 2
+    * Beds: 1
+    * Bathrooms: public
+
+    ###Amenities
+    * Parking: Street parking
+    * Internet: Yes
+    * Kitchen: Share
+  DOC
+  )
+
+  Room.find_or_create_by!(
+    name: "Dorm",
+    location: seattle,
+    markdown: <<-DOC.strip_heredoc
+    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/dorm.jpg)
+    ###About the room
+    Traveling alone can get lonely at times. Why not stay somewhere you can meet other travelers and share your stories? Out dorm is a place for you and up to three other mates from who-knows-where...
+    ###The space
+    * Accommodates: 5
+    * Beds: 5
+    * Bathrooms: public
+
+    ###Amenities
+    * Parking: Street parking
+    * Internet: Yes
+    * Kitchen: Share
+  DOC
+  )
+end

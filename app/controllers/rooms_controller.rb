@@ -1,7 +1,8 @@
 class RoomsController < ApplicationController
 
   def show
-    room = Room.find(params[:id])
+    r = Room.arel_table
+    room = Room.find_by(r[:name].matches params[:id])
     respond_with room
   end
 
