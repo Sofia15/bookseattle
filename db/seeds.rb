@@ -10,7 +10,7 @@
 ActiveRecord::Base.transaction do
 
   seattle = Location.find_or_create_by!(
-    # id: 1,
+    id: 1,
     name: "Seattle",
     markdown: <<-DOC.strip_heredoc
     This is markdown. Whitespace will be preserved.
@@ -18,7 +18,8 @@ ActiveRecord::Base.transaction do
   )
 
   Room.find_or_create_by!(
-    name: "Wonder World",
+    id:1,
+    name: "WonderWorld",
     location: seattle,
     markdown: <<-DOC.strip_heredoc
     ## Wonder World
@@ -39,6 +40,7 @@ ActiveRecord::Base.transaction do
   )
 
   Room.find_or_create_by!(
+    id:2,
     name: "Paris",
     location: seattle,
     markdown: <<-DOC.strip_heredoc
@@ -61,6 +63,7 @@ ActiveRecord::Base.transaction do
   )
 
   Room.find_or_create_by!(
+    id:3,
     name: "Dorm",
     location: seattle,
     markdown: <<-DOC.strip_heredoc

@@ -14,6 +14,8 @@ gem 'puma', '~> 3.7'
 
 gem 'rack-cors'
 
+gem 'redcarpet'
+
 gem 'responders', '~> 2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
