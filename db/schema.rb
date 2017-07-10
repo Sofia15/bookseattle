@@ -50,21 +50,13 @@ ActiveRecord::Schema.define(version: 20170629234626) do
     t.index ["room_id"], name: "index_reservations_on_room_id"
   end
 
-  create_table "room_rates", force: :cascade do |t|
-    t.decimal "rate", precision: 10, scale: 2, default: "0.0", null: false
-    t.daterange "rate_duration", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["room_id", "rate_duration"], name: "index_room_rates_on_room_id_and_rate_duration", unique: true
-    t.index ["room_id"], name: "index_room_rates_on_room_id"
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.text "markdown", null: false
     t.text "html", null: false
     t.bigint "location_id", null: false
+    t.decimal "weekend_rate", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "weekday_rate", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_rooms_on_location_id"
