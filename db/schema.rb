@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629234626) do
+ActiveRecord::Schema.define(version: 20170629233121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,15 +18,6 @@ ActiveRecord::Schema.define(version: 20170629234626) do
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "booked_rates", force: :cascade do |t|
-    t.bigint "room_id", null: false
-    t.bigint "reservation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["reservation_id"], name: "index_booked_rates_on_reservation_id"
-    t.index ["room_id"], name: "index_booked_rates_on_room_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -40,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170629234626) do
   create_table "reservations", force: :cascade do |t|
     t.boolean "cancelled", default: false
     t.daterange "reservation_duration", null: false
+    t.decimal "total_price", precision: 10, scale: 2, default: "0.0", null: false
     t.bigint "room_id", null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", null: false
