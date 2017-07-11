@@ -5,22 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# Room.destroy_all
+  Room.delete_all
+  Location.delete_all
 
 ActiveRecord::Base.transaction do
 
-  seattle = Location.find_or_create_by!(
-    id: 1,
+  seattle = Location.create!(
     name: "Seattle",
     markdown: <<-DOC.strip_heredoc
     This is markdown. Whitespace will be preserved.
   DOC
   )
 
-  Room.find_or_create_by!(
-    id:1,
+  Room.create!(
     name: "WonderWorld",
     location: seattle,
+    max_guests: 4,
+    shared: false,
     markdown: <<-DOC.strip_heredoc
     ## Wonder World
 
@@ -39,9 +40,10 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
-  Room.find_or_create_by!(
-    id:2,
+  Room.create(
     name: "Paris",
+    max_guests: 2,
+    shared: false,
     location: seattle,
     markdown: <<-DOC.strip_heredoc
     ## Paris
@@ -65,6 +67,8 @@ ActiveRecord::Base.transaction do
   Room.find_or_create_by!(
     id:3,
     name: "Dorm",
+    max_guests: 5,
+    shared: true,
     location: seattle,
     markdown: <<-DOC.strip_heredoc
     ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/dorm.jpg)
