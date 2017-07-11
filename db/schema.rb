@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20170629233121) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.boolean "shared", default: false, null: false
+    t.integer "max_guests", default: 1, null: false
     t.string "name", limit: 50, null: false
     t.text "markdown", null: false
     t.text "html", null: false

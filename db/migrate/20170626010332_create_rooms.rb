@@ -1,6 +1,8 @@
 class CreateRooms < ActiveRecord::Migration[5.1]
   def change
     create_table :rooms do |t|
+      t.boolean :shared, null: false, default: false
+      t.integer :max_guests, null: false, default: 1
       t.string :name, null: false, limit: 50
       t.text :markdown, null: false
       t.text :html, null:false
