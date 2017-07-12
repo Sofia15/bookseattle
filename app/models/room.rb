@@ -15,4 +15,13 @@ class Room < ApplicationRecord
     self.html = md.render(markdown)
   end
 
+  def as_json(options={})
+    super.as_json(options).merge({:available_days => available_days})
+  end
+
+  def available_days
+    range = Date.today..1.year.from_now
+    range.map {|day| day.to_s}
+  end
+
 end

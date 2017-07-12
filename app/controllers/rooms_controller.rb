@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   def show
     r = Room.arel_table
     room = Room.find_by(r[:name].matches params[:id])
-    respond_with room
+    respond_with room, :include => {:reservations => {:only => :reservation_duration}}
   end
 
   def index
