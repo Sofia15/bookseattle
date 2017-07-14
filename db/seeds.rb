@@ -23,6 +23,8 @@ ActiveRecord::Base.transaction do
     location: seattle,
     max_guests: 4,
     shared: false,
+    weekend_rate: 90.00,
+    weekday_rate: 75.00,
     markdown: <<-DOC.strip_heredoc
     ## Wonder World
 
@@ -46,6 +48,8 @@ ActiveRecord::Base.transaction do
     max_guests: 2,
     shared: false,
     location: seattle,
+    weekday_rate: 110.00,
+    weekend_rate: 125.00,
     markdown: <<-DOC.strip_heredoc
     ## Paris
 
@@ -70,6 +74,8 @@ ActiveRecord::Base.transaction do
     max_guests: 5,
     shared: true,
     location: seattle,
+    weekday_rate: 50.00,
+    weekend_rate: 75.00,
     markdown: <<-DOC.strip_heredoc
     ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/dorm.jpg)
     ###About the room

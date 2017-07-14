@@ -26,7 +26,7 @@ class ReservationsController < ApplicationController
     duped = reservation_params.dup
     check_in = duped.delete(:checkin).try(:to_date)
     check_out = duped.delete(:checkout).try(:to_date)
-    duped[:reservation_duration] = check_in..check_out
+    duped[:reservation_duration] = check_in...check_out
     duped
   end
 
