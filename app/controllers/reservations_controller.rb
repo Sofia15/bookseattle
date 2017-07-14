@@ -9,8 +9,12 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.create!(munged_params)
-    respond_with reservation
+    reservation = Reservation.create(munged_params)
+    if reservation.valid?
+      respond_with(reservation)
+    else
+      render json: {errors: reservation.errors.full_messages}
+    end
   end
 
   def update
