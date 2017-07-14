@@ -6,8 +6,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
       t.decimal :total_price, default: 0, precision:10, scale: 2, null:false
 
       t.references :room, null:false
-      t.references :account, null:false
-
+      t.integer :guest_count, null: false
       t.timestamps null:false
     end
     add_index :reservations, [:room_id, :reservation_duration], unique: true

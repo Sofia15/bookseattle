@@ -31,12 +31,11 @@ ActiveRecord::Schema.define(version: 20170629233121) do
   create_table "reservations", force: :cascade do |t|
     t.boolean "cancelled", default: false
     t.daterange "reservation_duration", null: false
-    t.decimal "total_price", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "total_price", precision: 10, scale: 2, default: "0.00", null: false
     t.bigint "room_id", null: false
-    t.bigint "account_id", null: false
+    t.integer "guest_count", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_reservations_on_account_id"
     t.index ["cancelled"], name: "index_reservations_on_cancelled"
     t.index ["room_id", "reservation_duration"], name: "index_reservations_on_room_id_and_reservation_duration", unique: true
     t.index ["room_id"], name: "index_reservations_on_room_id"

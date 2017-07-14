@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
   Room.delete_all
   Location.delete_all
+  Reservation.delete_all
 
 ActiveRecord::Base.transaction do
 
@@ -17,7 +18,7 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
-  Room.create!(
+  wonderworld = Room.create!(
     name: "WonderWorld",
     location: seattle,
     max_guests: 4,
@@ -40,7 +41,7 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
-  Room.create(
+  paris = Room.create(
     name: "Paris",
     max_guests: 2,
     shared: false,
@@ -64,8 +65,7 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
-  Room.find_or_create_by!(
-    id:3,
+  dorm = Room.create!(
     name: "Dorm",
     max_guests: 5,
     shared: true,
@@ -84,5 +84,41 @@ ActiveRecord::Base.transaction do
     * Internet: Yes
     * Kitchen: Share
   DOC
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 7, 11)..Date.new(2017, 7, 23),
+    room: wonderworld,
+    guest_count: 2
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 8, 11)..Date.new(2017, 8, 12),
+    room: wonderworld,
+    guest_count: 4
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 5, 11)..Date.new(2017, 5, 12),
+    room: paris,
+    guest_count: 2
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 10, 21)..Date.new(2017, 10, 25),
+    room: paris,
+    guest_count: 2
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 8, 5)..Date.new(2017, 8, 7),
+    room: dorm,
+    guest_count: 2
+  )
+
+  Reservation.create!(
+    reservation_duration: Date.new(2017, 11, 5)..Date.new(2017, 11, 7),
+    room: dorm,
+    guest_count: 2
   )
 end
