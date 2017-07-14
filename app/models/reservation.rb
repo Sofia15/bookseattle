@@ -6,13 +6,30 @@ class Reservation < ApplicationRecord
     message: 'The room is not available.'
   }
 
-  validate :validate_reservation_duration
+  validate :validate_check_out_after_check_in
+
+  validate :validate_room_available
 
   validate :validate_guest_count
 
   before_save :calculate_total_price
 
-  def validate_reservation_duration
+  def check_in
+    reservation_duration.first if reservation_duration.present?
+  end
+
+  def check_out
+    reservation_duration.last if reservation_duration.present?
+  end
+
+  def validate_check_out_after_check_in
+    binding.pry
+    if check_out <= check_in
+      errors.add(:reservation_duration, "You can't check out before you check in!!")
+    end
+  end
+
+  def validate_room_available
     reservations = Reservation.where(cancelled: false, room_id: room.id)
     if reservations.any? {|r| reservation_duration.overlaps? r.reservation_duration}
       errors.add(:reservation_duration, "The room is not available")

@@ -15,6 +15,8 @@ class ReservationsController < ApplicationController
     else
       render json: {errors: reservation.errors.full_messages}
     end
+  rescue ArgumentError
+    render json: {errors: ['Both check-in and check-out are required.']}
   end
 
   def update
