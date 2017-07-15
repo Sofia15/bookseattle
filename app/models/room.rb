@@ -23,12 +23,12 @@ class Room < ApplicationRecord
     all_days = Date.today..1.year.from_now
     # TODO: query only for reservations starting today + later.
 
-    reserved_days = Reservation.where(room: self, cancelled: false)
+    reservations = Reservation.where(room: self, cancelled: false)
+    reserved_days = reservations.pluck(:reservation_duration).map{|r| r.to_a}.flatten
 
-    # days = all_days - reserved_days
-    # days.map {|day| day.to_s}
-
-    all_days.map {|day| day.to_s}
+    days = all_days.to_a - reserved_days
+    days.map {|day| day.to_s}
+    # all_days.map {|day| day.to_s}
   end
 
 end

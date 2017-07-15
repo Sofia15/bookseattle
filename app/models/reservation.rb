@@ -28,9 +28,15 @@ class Reservation < ApplicationRecord
   def validate_room_available
     reservations = Reservation.where(cancelled: false, room_id: room.id)
 
-    if reservations.any? {|r| reservation_duration.overlaps? r.reservation_duration}
+    if overlapping_days.any?
       errors.add(:reservation_duration, "The room is not available")
     end
+  end
+
+  def overlapping_days
+    reservations = Reservation.where(cancelled: false, room_id: id)
+
+    reservations.select {|r| reservation_duration.overlaps? r.reservation_duration}.map{|r| r.to_a}.flatten
   end
 
   def calculate_total_price
