@@ -9,14 +9,17 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    reservation = Reservation.create(munged_params)
-    if reservation.valid?
+    reservation = Reservation.new(munged_params)
+    if reservation.save
       respond_with(reservation)
     else
       render json: {errors: reservation.errors.full_messages}
     end
   rescue ArgumentError
     render json: {errors: ['Both check-in and check-out are required.']}
+
+  # rescue ActiveRecord::StatementInvalid
+  #   render json: {errors: ['You can\'t check-out before you check-in']}
   end
 
   def update

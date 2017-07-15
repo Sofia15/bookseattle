@@ -1,10 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :room
 
-  validates :reservation_duration, presence: true, uniqueness: {
-    scope: [:room_id],
-    message: 'The room is not available.'
-  }
+  validates :reservation_duration, presence: true
 
   validate :validate_check_out_after_check_in
 
@@ -23,14 +20,14 @@ class Reservation < ApplicationRecord
   end
 
   def validate_check_out_after_check_in
-    binding.pry
     if check_out <= check_in
-      errors.add(:reservation_duration, "You can't check out before you check in!!")
+      errors.add(:base, "You can't check out before you check in!!")
     end
   end
 
   def validate_room_available
     reservations = Reservation.where(cancelled: false, room_id: room.id)
+
     if reservations.any? {|r| reservation_duration.overlaps? r.reservation_duration}
       errors.add(:reservation_duration, "The room is not available")
     end
