@@ -20,7 +20,7 @@ class Room < ApplicationRecord
   end
 
   def available_days
-    all_days = Date.today..1.year.from_now
+    all_days = Time.zone.today..1.year.from_now
     # TODO: query only for reservations starting today + later.
 
     reservations = Reservation.where(room: self, cancelled: false)
