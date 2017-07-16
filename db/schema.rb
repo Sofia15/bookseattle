@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170629233121) do
   create_table "reservations", force: :cascade do |t|
     t.boolean "cancelled", default: false
     t.daterange "reservation_duration", null: false
-    t.decimal "total_price", precision: 10, scale: 2, default: "0.00", null: false
+    t.decimal "total_price", precision: 10, scale: 2, default: "0.0", null: false
     t.bigint "room_id", null: false
     t.integer "guest_count", null: false
     t.datetime "created_at", null: false
