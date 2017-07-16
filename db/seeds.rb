@@ -28,7 +28,7 @@ ActiveRecord::Base.transaction do
     markdown: <<-DOC.strip_heredoc
     ## Wonder World
 
-    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/kitty.jpg)
+    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/hellokitty2.jpg)
     ###About the room
     Would you like to make your baby’s food and clean your baby supplies in a comfortable kitchen? Do you want to feel more accepted when your baby cry at night? You can still do it when
     ###The space
