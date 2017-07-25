@@ -19,7 +19,7 @@ module Bookseattle
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'localhost:8080', 'www.bookseattle.net'
+        origins ALLOWED_ORIGINS[Rails.env]
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
