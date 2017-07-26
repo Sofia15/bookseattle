@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20170629233121) do
   create_table "locations", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.text "markdown", null: false
+    t.string "timezone", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_locations_on_name", unique: true
@@ -30,7 +31,7 @@ ActiveRecord::Schema.define(version: 20170629233121) do
 
   create_table "reservations", force: :cascade do |t|
     t.boolean "cancelled", default: false
-    t.daterange "reservation_duration", null: false
+    t.tsrange "reservation_duration", null: false
     t.decimal "total_price", precision: 10, scale: 2, default: "0.0", null: false
     t.bigint "room_id", null: false
     t.integer "guest_count", null: false

@@ -2,7 +2,7 @@ class CreateReservations < ActiveRecord::Migration[5.1]
   def change
     create_table :reservations do |t|
       t.boolean :cancelled, default: false, index: true
-      t.daterange :reservation_duration, null:false
+      t.tsrange :reservation_duration, null:false
       t.decimal :total_price, default: 0, precision:10, scale: 2, null:false
 
       t.references :room, null:false
