@@ -13,6 +13,7 @@ ActiveRecord::Base.transaction do
 
   seattle = Location.create!(
     name: "Seattle",
+    timezone: "America/Vancouver",
     markdown: <<-DOC.strip_heredoc
     This is markdown. Whitespace will be preserved.
   DOC
@@ -92,39 +93,41 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
+Time.use_zone(seattle.timezone) do
   Reservation.create!(
-    reservation_duration: Date.new(2017, 7, 11)..Date.new(2017, 7, 23),
+    reservation_duration: DateTime.new(2017, 7, 11)..DateTime.new(2017, 7, 23),
     room: wonderworld,
     guest_count: 2
   )
 
   Reservation.create!(
-    reservation_duration: Date.new(2017, 8, 11)..Date.new(2017, 8, 12),
+    reservation_duration: DateTime.new(2017, 8, 11)..DateTime.new(2017, 8, 12),
     room: wonderworld,
     guest_count: 4
   )
 
   Reservation.create!(
-    reservation_duration: Date.new(2017, 5, 11)..Date.new(2017, 5, 12),
+    reservation_duration: DateTime.new(2017, 5, 11, 15, 0, 0)..DateTime.new(2017, 5, 12, 12, 0, 0),
     room: paris,
     guest_count: 2
   )
 
   Reservation.create!(
-    reservation_duration: Date.new(2017, 10, 21)..Date.new(2017, 10, 25),
+    reservation_duration: DateTime.new(2017, 10, 21, 15, 0, 0)..DateTime.new(2017, 10, 25, 12, 0, 0),
     room: paris,
     guest_count: 2
   )
 
   Reservation.create!(
-    reservation_duration: Date.new(2017, 8, 5)..Date.new(2017, 8, 7),
+    reservation_duration: DateTime.new(2017, 8, 5, 15, 0, 0)..DateTime.new(2017, 8, 7, 12, 0, 0),
     room: dorm,
     guest_count: 2
   )
 
   Reservation.create!(
-    reservation_duration: Date.new(2017, 11, 5)..Date.new(2017, 11, 7),
+    reservation_duration: DateTime.new(2017, 11, 5, 15, 0, 0)..DateTime.new(2017, 11, 7, 12, 0, 0),
     room: dorm,
     guest_count: 2
   )
+  end
 end
