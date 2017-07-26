@@ -20,15 +20,22 @@ class Room < ApplicationRecord
   end
 
   def available_days
-    all_days = Time.zone.today..1.year.from_now
-    # TODO: query only for reservations starting today + later.
+    Time.use_zone(location.timezone) do
+      all_days = Time.zone.tomorrow..1.year.from_now
+      # TODO: query only for reservations starting today + later.
 
-    reservations = Reservation.where(room: self, cancelled: false)
-    reserved_days = reservations.pluck(:reservation_duration).map{|r| r.to_a}.flatten
+      reservations = Reservation
+      .where(room: self, cancelled: false)
+      .where("lower(reservation_duration) >= now()")
 
-    days = all_days.to_a - reserved_days
-    days.map {|day| day.to_s}
-    # all_days.map {|day| day.to_s}
+      reserved_days = reservations.pluck(:reservation_duration).map{|tsrange| tsrange.first.to_date..tsrange.last.to_date}
+      .map(&:to_a)
+      .flatten
+
+      days = all_days.to_a - reserved_days
+      days.map {|day| day.to_s}
+      # all_days.map {|day| day.to_s}
+    end
   end
 
 end
