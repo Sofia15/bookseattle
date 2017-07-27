@@ -1,11 +1,5 @@
 class ReservationsController < ApplicationController
-  def index
-  end
-
   def show
-  end
-
-  def destroy
   end
 
   def create
@@ -17,12 +11,10 @@ class ReservationsController < ApplicationController
     end
   rescue ArgumentError
     render json: {errors: ['Both check-in and check-out are required.']}
-
+  rescue PG::UniqueViolation
+    render json: {errors: ['The room is not available']}
   # rescue ActiveRecord::StatementInvalid
   #   render json: {errors: ['You can\'t check-out before you check-in']}
-  end
-
-  def update
   end
 
   private
@@ -37,6 +29,6 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation)
-      .permit(:checkin, :checkout, :guest_count, :room_id)
+      .permit(:check_in, :check_out, :guest_count, :room_id)
   end
 end

@@ -34,9 +34,9 @@ class Reservation < ApplicationRecord
   end
 
   def overlapping_days
-    reservations = Reservation.where(cancelled: false, room_id: id)
+    reservations = Reservation.where(cancelled: false, room_id: room.id)
 
-    reservations.select {|r| reservation_duration.overlaps? r.reservation_duration}.map{|r| r.to_a}.flatten
+    reservations.select {|r| reservation_duration.overlaps? r.reservation_duration}.map{|r| r.reservation_duration.first.to_date..r.reservation_duration.last.to_date}.map{|r| r.to_a}.flatten
   end
 
   def calculate_total_price
