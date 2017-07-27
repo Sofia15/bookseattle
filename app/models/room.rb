@@ -16,7 +16,8 @@ class Room < ApplicationRecord
   end
 
   def as_json(options={})
-    super.as_json(options).merge({:available_days => available_days})
+    super.as_json(options).merge({:available_days => available_days,
+                                  :location => {name: location.name}})
   end
 
   def available_days

@@ -21,7 +21,7 @@ class Reservation < ApplicationRecord
 
   def validate_check_out_after_check_in
     if check_out <= check_in
-      errors.add(:base, "You can't check out before you check in!!")
+      errors.add(:base, "Check-out must be later than check-in.")
     end
   end
 
@@ -29,7 +29,7 @@ class Reservation < ApplicationRecord
     reservations = Reservation.where(cancelled: false, room_id: room.id)
 
     if overlapping_days.any?
-      errors.add(:reservation_duration, "The room is not available")
+      errors.add(:reservation_duration, "The room is not available.")
     end
   end
 

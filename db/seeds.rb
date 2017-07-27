@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-  Room.delete_all
-  Location.delete_all
-  Reservation.delete_all
+Room.delete_all
+Location.delete_all
+Reservation.delete_all
 
 ActiveRecord::Base.transaction do
 
@@ -19,17 +19,21 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
+  wonderworld_photo = 'http://www.bookseattle.net/rooms/hellokitty2.jpg'
+
   wonderworld = Room.create!(
     name: "WonderWorld",
     location: seattle,
     max_guests: 4,
+    photo_url: wonderworld_photo,
     shared: false,
     weekend_rate: 90.00,
     weekday_rate: 75.00,
     markdown: <<-DOC.strip_heredoc
     ## Wonder World
 
-    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/hellokitty2.jpg)
+
+    ![WonderWorld photo](#{wonderworld_photo})
     ###About the room
     Would you like to make your baby’s food and clean your baby supplies in a comfortable kitchen? Do you want to feel more accepted when your baby cry at night? You can still do it when
     ###The space
@@ -44,17 +48,20 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
+  paris_photo = 'http://www.bookseattle.net/rooms/paris.jpg'
+
   paris = Room.create(
     name: "Paris",
     max_guests: 2,
     shared: false,
     location: seattle,
+    photo_url: paris_photo,
     weekday_rate: 110.00,
     weekend_rate: 125.00,
     markdown: <<-DOC.strip_heredoc
     ## Paris
 
-    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/paris.jpg)
+    ![Paris photo](#{paris_photo})
 
     ###About the room
     This romantic room is for  you and your loving one. You will stay in our the most romantic space and explore things that you would do in Paris..
@@ -70,15 +77,17 @@ ActiveRecord::Base.transaction do
   DOC
   )
 
+  dorm_photo = "http://www.bookseattle.net/rooms/dorm.jpg"
   dorm = Room.create!(
     name: "Dorm",
     max_guests: 5,
     shared: true,
     location: seattle,
+    photo_url: dorm_photo,
     weekday_rate: 50.00,
     weekend_rate: 75.00,
     markdown: <<-DOC.strip_heredoc
-    ![MacDown logo](https://s3-us-west-2.amazonaws.com/www.bookseattle.net/rooms/dorm.jpg)
+    ![Dorm photo](#{dorm_photo})
     ###About the room
     Traveling alone can get lonely at times. Why not stay somewhere you can meet other travelers and share your stories? Out dorm is a place for you and up to three other mates from who-knows-where...
     ###The space

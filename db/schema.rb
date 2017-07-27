@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170629233121) do
     t.boolean "shared", default: false, null: false
     t.integer "max_guests", default: 1, null: false
     t.string "name", limit: 50, null: false
+    t.string "photo_url", limit: 150, null: false
     t.text "markdown", null: false
     t.text "html", null: false
     t.bigint "location_id", null: false
