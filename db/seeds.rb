@@ -1,3 +1,4 @@
+# coding: utf-8
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -35,16 +36,16 @@ ActiveRecord::Base.transaction do
 
     ![WonderWorld photo](#{wonderworld_photo})
     ###About the room
-    Would you like to make your baby’s food and clean your baby supplies in a comfortable kitchen? Do you want to feel more accepted when your baby cry at night? You can still do it when
+    Would you like to make your baby’s food and clean your baby supplies in a comfortable kitchen? Do you want to feel more accepted when your baby cry at night? You can still do it all when you are staying in Dorm.
     ###The space
     * Accommodates: 3-4
     * Beds: 2
     * Bathrooms: private
 
     ###Amenities
-    * Parking: Street parking
-    * Internet: Yes
-    * Kitchen: Share
+    * Parking: street
+    * Internet: yes
+    * Kitchen: shared
   DOC
   )
 
@@ -64,16 +65,16 @@ ActiveRecord::Base.transaction do
     ![Paris photo](#{paris_photo})
 
     ###About the room
-    This romantic room is for  you and your loving one. You will stay in our the most romantic space and explore things that you would do in Paris..
+    This romantic room is for  you and your loved one. You will stay in our the most romantic space and explore things that you would do in Paris..
     ###The space
     * Accommodates: 2
     * Beds: 1
     * Bathrooms: public
 
     ###Amenities
-    * Parking: Street parking
-    * Internet: Yes
-    * Kitchen: Share
+    * Parking: street
+    * Internet: yes
+    * Kitchen: shared
   DOC
   )
 
@@ -87,6 +88,7 @@ ActiveRecord::Base.transaction do
     weekday_rate: 50.00,
     weekend_rate: 75.00,
     markdown: <<-DOC.strip_heredoc
+    ## Dorm
     ![Dorm photo](#{dorm_photo})
     ###About the room
     Traveling alone can get lonely at times. Why not stay somewhere you can meet other travelers and share your stories? Out dorm is a place for you and up to three other mates from who-knows-where...
@@ -96,9 +98,9 @@ ActiveRecord::Base.transaction do
     * Bathrooms: public
 
     ###Amenities
-    * Parking: Street parking
-    * Internet: Yes
-    * Kitchen: Share
+    * Parking: street
+    * Internet: yes
+    * Kitchen: shared
   DOC
   )
 

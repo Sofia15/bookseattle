@@ -29,7 +29,7 @@ class Reservation < ApplicationRecord
     reservations = Reservation.where(cancelled: false, room_id: room.id)
 
     if overlapping_days.any?
-      errors.add(:reservation_duration, "The room is not available.")
+      errors.add(:base, "The room is not available.")
     end
   end
 
